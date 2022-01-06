@@ -39,6 +39,7 @@ header {
     background-color: var(--header-color);
     backdrop-filter: blur(10px);
     transition: height var(--transition);
+    align-items: center;
 }
 
 #logo {
@@ -47,7 +48,6 @@ header {
     color: var(--header-text-color);
     transition: all var(--transition);
     cursor: pointer;
-    align-self: center;
     width: max-content;
 }
 
@@ -64,6 +64,13 @@ header.logo-small {
 }
 
 #feed-cont {
-    padding-top: var(--top-bar-height);
+    padding-top: calc(var(--top-bar-height) + 20px);
     width: 100%;
+}
+
+@media (min-width: 1200px) {
+    header {
+        align-items: start;
+        padding-left: 10px;
+    }
 }

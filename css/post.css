@@ -31,7 +31,7 @@
     width: 100%;
     height: 40px;
     background-color: var(--header-color);
-    opacity: 0;
+    /* opacity: 0; */
     transition: opacity var(--transition);
 }
 
@@ -39,10 +39,28 @@
     opacity: 1;
 }
 
+.like-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-.post-extras>box-icon {
+.heart-fill {
+    position: absolute;
+    transform: scale(0);
+    transition: transform var(--transition);
+}
+
+.liked .heart-fill {
+    transform: scale(1);
+}
+
+
+.post-extras>box-icon,
+.post-extras>.box-icon {
     margin-inline: 10px;
     height: 40px;
+    width: 24px;
     cursor: pointer;
 }
 

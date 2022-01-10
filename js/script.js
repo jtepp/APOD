@@ -4,8 +4,7 @@ class Post {
         this.date = config.date
         this.desc = config.explanation
         this.hdurl = config.hdurl
-        this.url = config.url
-        this.thumb = config.thumbnail_url
+        this.url = config.thumbnail_url || config.url
         this.title = config.title
         this.mediaType = config.media_type
         this.id = "id" + config.url.replace('https://apod.nasa.gov/apod/image/', '').replace('https://www.youtube.com/embed/', '').slice(0, -10).split('/').join('-')
@@ -37,7 +36,7 @@ class Post {
         const postImage = document.createElement("img")
         postImage.classList.add('post-image')
         postImage.setAttribute('draggable', 'false')
-        postImage.src = this.thumb || this.url
+        postImage.src = this.url
 
         postImageCont.appendChild(postImage)
         postDiv.appendChild(postImageCont)
@@ -82,7 +81,7 @@ class Post {
                         </svg>
         `
         share.onclick = (e) => {
-            const text = window.location.href + '?id=' + this.id
+            const text = window.location.href + '?date=' + this.date
             const el = document.createElement('textarea')
             el.value = text
             document.body.appendChild(el)
@@ -91,13 +90,13 @@ class Post {
             document.body.removeChild(el)
 
 
-            console.log(e)
-            console.log(e.target)
             const shareButton = e.target
-            shareButton.classList.add('copied')
-            setTimeout(() => {
-                shareButton.classList.remove('copied')
-            }, 2000)
+            if (!shareButton.classList.contains('copied')) {
+                shareButton.classList.add('copied')
+                setTimeout(() => {
+                    shareButton.classList.remove('copied')
+                }, 2000)
+            }
         }
 
         postExtras.appendChild(like)
@@ -154,6 +153,7 @@ logo.onclick = () => {
 
 
 // populate(getDate(new Date().addDays(daysToShow * -1)), getDate(new Date()), true)
+demo()
 
 function populate(start, end, clear) {
     fetch('https://api.nasa.gov/planetary/apod?api_key=E7IKFgmhJVFqvxnlbKEJUvBTcVE5HfWCFFCuYSk9&&thumbs=true&start_date=' + start + '&end_date=' + end)
@@ -170,7 +170,20 @@ function populate(start, end, clear) {
         })
 }
 
-
+function demo() {
+    const data = {
+        "date": "2022-01-10",
+        "explanation": "Why does Comet Leonard's tail wag? The featured time-lapse video shows the ion tail of Comet C/2021 A1 (Leonard) as it changed over ten days early last month.  The video was taken by NASA's Solar Terrestrial Relations Observatory-Ahead (STEREO-A) spacecraft that co-orbits the Sun at roughly the same distance as the Earth. Each image in this 29-degree field was subtracted from following image to create frames that highlight differences. The video clearly shows Comet Leonard's long ion tail extending, wagging, and otherwise being blown around by the solar wind -- a stream of fast-moving ions that stream out from the Sun.  Since the video was taken, Comet Leonard continued plunging toward the Sun, reached its closest approach to the Sun between the orbits of Mercury and Venus, survived this closest approach without breaking apart, and is now fading as heads out of our Solar System.   Tuesday over Zoom: APOD editor to present the Best APOD Space Images of 2021",
+        "media_type": "video",
+        "service_version": "v1",
+        "thumbnail_url": "https://img.youtube.com/vi/RtDSxi-D4KA/0.jpg",
+        "title": "Comet Leonard's Tail Wag",
+        "url": "https://www.youtube.com/embed/RtDSxi-D4KA?rel=0"
+    }
+    const p = new Post(data)
+    posts[p.id] = p
+    feedCont.appendChild(p.getHTML())
+}
 
 // function to get current date as YYYY-MM-DD
 function getDate(date) {

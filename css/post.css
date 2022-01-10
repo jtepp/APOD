@@ -39,9 +39,15 @@
     opacity: 1;
 }
 
+.like-button,
+.share-button {
+    position: relative;
+}
+
 .bx-heart-fill {
     position: absolute;
     transform: scale(0);
+    left: 0;
     transition: transform var(--transition);
 }
 
@@ -52,6 +58,7 @@
 
 .bx-check {
     position: absolute;
+    left: 0;
     fill: #00b400;
     stroke-width: 2px;
     opacity: 0;
@@ -80,6 +87,9 @@
     margin-inline: 10px;
     height: 40px;
     width: 24px;
+}
+
+.box-icon {
     cursor: pointer;
     fill: var(--black-white);
 }

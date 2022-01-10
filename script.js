@@ -5,10 +5,13 @@ class Post {
         this.desc = config.explanation
         this.hdurl = config.hdurl
         this.url = config.url
+        this.thumb = config.thumbnail_url
         this.title = config.title
-        this.id = "id" + config.url.replace('https://apod.nasa.gov/apod/image/', '').slice(0, -4).split('/').join('-')
-        this.ext = config.url.slice(-4)
+        this.mediaType = config.media_type
+        this.id = "id" + config.url.replace('https://apod.nasa.gov/apod/image/', '').replace('https://www.youtube.com/embed/', '').slice(0, -10).split('/').join('-')
+        this.ext = config.url.slice(-10)
         this.liked = localStorage.getItem(this.id) || false
+        this.x = config
     }
 
     toggleLike(self) {
@@ -31,10 +34,10 @@ class Post {
         postImageCont.classList.add('post-image-cont')
         postImageCont.id = this.id
 
-        const postImage = document.createElement('img')
+        const postImage = document.createElement("img")
         postImage.classList.add('post-image')
         postImage.setAttribute('draggable', 'false')
-        postImage.src = this.url
+        postImage.src = this.thumb || this.url
 
         postImageCont.appendChild(postImage)
         postDiv.appendChild(postImageCont)
@@ -85,12 +88,33 @@ class Post {
     }
 }
 
+Date.prototype.addDays = function (days) {
+    var date = new Date(this.valueOf());
+    date.setDate(date.getDate() + days);
+    return date;
+}
+
 let posts = {}
+let dateOffset = 0
+const daysToShow = 0
 const feedCont = document.getElementById('feed-cont');
 const header = document.querySelector('header');
 const logo = document.getElementById('logo');
 const topBarHeight = getComputedStyle(document.documentElement)
     .getPropertyValue('--top-bar-height').replace('px', '').trim();
+
+if (localStorage.getItem('scheme')) {
+    document.body.setAttribute('scheme', localStorage.getItem('scheme'))
+    if (localStorage.getItem('scheme') == 'dark') {
+        document.getElementById('scheme-button-inner').classList.remove('dark')
+    }
+}
+
+document.getElementById('scheme-button').onclick = () => {
+    document.getElementById('scheme-button-inner').classList.toggle('dark')
+    document.body.getAttribute('scheme') === 'dark' ? document.body.setAttribute('scheme', 'light') : document.body.setAttribute('scheme', 'dark')
+    localStorage.setItem('scheme', document.body.getAttribute('scheme'))
+}
 
 document.body.onscroll = () => {
     if (document.documentElement.scrollTop > topBarHeight) {
@@ -107,10 +131,10 @@ logo.onclick = () => {
 }
 
 
-populate("2021-12-31", "2022-01-08", true)
+// populate(getDate(new Date().addDays(daysToShow * -1)), getDate(new Date()), true)
 
 function populate(start, end, clear) {
-    fetch('https://api.nasa.gov/planetary/apod?api_key=E7IKFgmhJVFqvxnlbKEJUvBTcVE5HfWCFFCuYSk9&start_date=' + start + '&end_date=' + end)
+    fetch('https://api.nasa.gov/planetary/apod?api_key=E7IKFgmhJVFqvxnlbKEJUvBTcVE5HfWCFFCuYSk9&&thumbs=true&start_date=' + start + '&end_date=' + end)
         .then(res => res.json())
         .then(data => {
             // console.log(data)
@@ -122,4 +146,23 @@ function populate(start, end, clear) {
                 feedCont.appendChild(p.getHTML())
             })
         })
+}
+
+
+
+// function to get current date as YYYY-MM-DD
+function getDate(date) {
+    let dd = date.getDate();
+    let mm = date.getMonth() + 1; //January is 0!
+    let yyyy = date.getFullYear();
+
+    if (dd < 10) {
+        dd = '0' + dd
+    }
+
+    if (mm < 10) {
+        mm = '0' + mm
+    }
+
+    return yyyy + '-' + mm + '-' + dd
 }

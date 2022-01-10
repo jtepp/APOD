@@ -8,22 +8,24 @@
 
 :root {
     scroll-behavior: smooth;
-
     --top-bar-height: 60px;
     --transition: 0.2s ease-out;
-    --bg-color: #acebf3;
+    --bg-color-start: #070820;
+    --bg-color-end: #07080D;
     --header-color: #ffffff80;
-    --header-text-color: #000;
+    --black-white: #000;
+    --white-black: #fff;
 }
 
 body[scheme="dark"] {
     --bg-color: #4d0080;
-    --header-color: #000000aa;
-    --header-text-color: #fff;
+    --header-color: #303030aa;
+    --black-white: #fff;
+    --white-black: #000;
 }
 
 body {
-    background-color: var(--bg-color)
+    background-image: linear-gradient(to right, var(--bg-color-start), var(--bg-color-end));
 }
 
 header {
@@ -33,22 +35,26 @@ header {
     width: 100%;
     height: var(--top-bar-height);
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
     text-align: center;
     background-color: var(--header-color);
     backdrop-filter: blur(10px);
-    transition: height var(--transition);
     align-items: center;
+    transition: all var(--transition);
 }
 
 #logo {
     font-family: 'Lalezar';
     font-size: 40px;
-    color: var(--header-text-color);
-    transition: all var(--transition);
+    color: var(--black-white);
     cursor: pointer;
     width: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    transition: all var(--transition);
 }
 
 .logo-small>#logo {
@@ -59,13 +65,11 @@ header.logo-small {
     height: calc(var(--top-bar-height) - 20px);
 }
 
-#scheme-button {
-    position: absolute;
-}
-
 #feed-cont {
     padding-top: calc(var(--top-bar-height) + 20px);
     width: 100%;
+    background: transparent;
+    transition: background-color var(--transition);
 }
 
 @media (min-width: 1200px) {
@@ -73,4 +77,126 @@ header.logo-small {
         align-items: start;
         padding-left: 10px;
     }
+}
+
+/* loading */
+
+#feed-cont:empty {
+    height: 100vh;
+    width: 100vw;
+    background-color: black;
+}
+
+/* #feed-cont:empty+header {
+    width: 100%;
+    height: 100vh;
+    will-change: height;
+} */
+
+#feed-cont:empty+header>#logo {
+    font-size: 60px;
+}
+
+#feed-cont:empty+header>#scheme-button {
+    /* display: none; */
+}
+
+#scheme-button {
+    position: relative;
+    height: 100%;
+    width: 80px;
+    cursor: pointer;
+}
+
+#scheme-button-bg {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    background-color: var(--white-black);
+    opacity: 0;
+    transition: opacity var(--transition);
+    z-index: -1;
+}
+
+#scheme-button:hover>#scheme-button-bg {
+    opacity: 0.8;
+}
+
+#scheme-button-inner {
+    position: absolute;
+    top: 10px;
+    left: 40px;
+    transform: translate(-20px, 10px);
+    border-radius: 50%;
+    background-color: var(--black-white);
+    height: 20px;
+    width: 20px;
+    /* transform: translate(-20px, 10px);
+    position: relative;
+    height: 20px;
+    width: 20px;
+    box-shadow: -7px 7px 0 5px var(--black-white); */
+    transition: all var(--transition);
+    box-shadow: 0px 0px 0 0px var(--black-white);
+}
+
+#scheme-button-inner.dark {
+    top: 2px;
+    left: 48px;
+    transform: translate(-20px, 10px);
+    background-color: transparent;
+    box-shadow: -7px 7px 0 5px var(--black-white);
+}
+
+.dark>.flare {
+    border-width: 0 2px 0px 2px;
+}
+
+.flare {
+    /* triangle */
+    position: absolute;
+    top: 6px;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 2px 8px 2px;
+    border-color: transparent transparent var(--black-white) transparent;
+    left: 50%;
+    transition: border-width 0.1s ease-in;
+}
+
+
+.flare:nth-child(1) {
+    transform: translateX(-50%) rotate(45deg) translateY(-16px);
+}
+
+.flare:nth-child(2) {
+    transform: translateX(-50%) rotate(90deg) translateY(-16px);
+}
+
+.flare:nth-child(3) {
+    transform: translateX(-50%) rotate(135deg) translateY(-16px);
+}
+
+.flare:nth-child(4) {
+    transform: translateX(-50%) rotate(180deg) translateY(-16px);
+}
+
+.flare:nth-child(5) {
+    transform: translateX(-50%) rotate(225deg) translateY(-16px);
+}
+
+.flare:nth-child(6) {
+    transform: translateX(-50%) rotate(270deg) translateY(-16px);
+}
+
+.flare:nth-child(7) {
+    transform: translateX(-50%) rotate(315deg) translateY(-16px);
+}
+
+.flare:nth-child(8) {
+    transform: translateX(-50%) rotate(0deg) translateY(-16px);
 }

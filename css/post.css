@@ -62,6 +62,7 @@
     height: 40px;
     width: 24px;
     cursor: pointer;
+    fill: var(--black-white);
 }
 
 [mode="compact"] .post-extras {

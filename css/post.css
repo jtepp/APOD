@@ -39,25 +39,44 @@
     opacity: 1;
 }
 
-.like-button {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.heart-fill {
+.bx-heart-fill {
     position: absolute;
     transform: scale(0);
     transition: transform var(--transition);
 }
 
-.liked .heart-fill {
+.liked .bx-heart-fill {
     transform: scale(1);
 }
 
 
-.post-extras>box-icon,
+.bx-check {
+    position: absolute;
+    fill: #00b400;
+    stroke-width: 2px;
+    opacity: 0;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.copied .bx-check {
+    animation: copied-check 2s;
+}
+
+.bx-link {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.copied .bx-link {
+    animation: copied-link 2s;
+}
+
 .post-extras>.box-icon {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-inline: 10px;
     height: 40px;
     width: 24px;
@@ -65,8 +84,53 @@
     fill: var(--black-white);
 }
 
+path,
+svg {
+    pointer-events: none;
+}
+
 [mode="compact"] .post-extras {
     position: absolute;
     bottom: 0;
 
+}
+
+@keyframes copied-link {
+    0% {
+        left: 0;
+        opacity: 1;
+    }
+
+    25% {
+        left: 24px;
+        opacity: 0;
+    }
+
+    75% {
+        left: 24px;
+        opacity: 0;
+    }
+
+    100% {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+@keyframes copied-check {
+    0% {
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    75% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
 }

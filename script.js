@@ -51,12 +51,12 @@ class Post {
         if (localStorage.getItem(this.id))
             like.classList.add('liked')
         like.innerHTML = `
-        <svg class="heart-stroke" width="24" height="24" viewBox="0 0 24 24">
+        <svg class="bx-heart-stroke" width="24" height="24" viewBox="0 0 24 24">
                             <path
                                 d="M12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412l7.332 7.332c.17.299.498.492.875.492a.99.99 0 0 0 .792-.409l7.415-7.415c2.354-2.354 2.354-6.049-.002-8.416a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595zm6.791 1.61c1.563 1.571 1.564 4.025.002 5.588L12 18.586l-6.793-6.793c-1.562-1.563-1.561-4.017-.002-5.584.76-.756 1.754-1.172 2.799-1.172s2.035.416 2.789 1.17l.5.5a.999.999 0 0 0 1.414 0l.5-.5c1.512-1.509 4.074-1.505 5.584-.002z">
                             </path>
                         </svg>
-                        <svg class="heart-fill" width="24" height="24" viewBox="0 0 24 24">
+                        <svg class="bx-heart-fill" width="24" height="24" viewBox="0 0 24 24">
                             <path
                                 d="M20.205 4.791a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412L12 21.414l8.207-8.207c2.354-2.353 2.355-6.049-.002-8.416z">
                             </path>
@@ -64,11 +64,24 @@ class Post {
         `
         like.onclick = () => this.toggleLike(this)
 
-        const share = document.createElement('box-icon')
-        share.classList.add('bx-button')
+        const share = document.createElement('div')
+        share.classList.add('box-icon')
         share.classList.add('share-button')
-        share.setAttribute('name', 'link')
-        share.onclick = () => {
+        share.innerHTML = `
+        <svg class="bx-link" width="24" height="24" viewBox="0 0 24 24">
+                            <path
+                                d="M8.465 11.293c1.133-1.133 3.109-1.133 4.242 0l.707.707 1.414-1.414-.707-.707c-.943-.944-2.199-1.465-3.535-1.465s-2.592.521-3.535 1.465L4.929 12a5.008 5.008 0 0 0 0 7.071 4.983 4.983 0 0 0 3.535 1.462A4.982 4.982 0 0 0 12 19.071l.707-.707-1.414-1.414-.707.707a3.007 3.007 0 0 1-4.243 0 3.005 3.005 0 0 1 0-4.243l2.122-2.121z">
+                            </path>
+                            <path
+                                d="m12 4.929-.707.707 1.414 1.414.707-.707a3.007 3.007 0 0 1 4.243 0 3.005 3.005 0 0 1 0 4.243l-2.122 2.121c-1.133 1.133-3.109 1.133-4.242 0L10.586 12l-1.414 1.414.707.707c.943.944 2.199 1.465 3.535 1.465s2.592-.521 3.535-1.465L19.071 12a5.008 5.008 0 0 0 0-7.071 5.006 5.006 0 0 0-7.071 0z">
+                            </path>
+                        </svg>
+                        <svg class="bx-check" width="24" height="24" viewBox="0 0 24 24">
+                            <path d="m10 15.586-3.293-3.293-1.414 1.414L10 18.414l9.707-9.707-1.414-1.414z"
+                                stroke="#00b400" stroke-width="1.5"></path>
+                        </svg>
+        `
+        share.onclick = (e) => {
             const text = window.location.href + '?id=' + this.id
             const el = document.createElement('textarea')
             el.value = text
@@ -76,6 +89,15 @@ class Post {
             el.select()
             document.execCommand('copy')
             document.body.removeChild(el)
+
+
+            console.log(e)
+            console.log(e.target)
+            const shareButton = e.target
+            shareButton.classList.add('copied')
+            setTimeout(() => {
+                shareButton.classList.remove('copied')
+            }, 2000)
         }
 
         postExtras.appendChild(like)

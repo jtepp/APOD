@@ -113,7 +113,7 @@ class Post {
 
         const postDate = document.createElement('div')
         postDate.classList.add('post-date')
-        const d = new Date(this.date + " ")
+        const d = new Date((this.date + " ").replace(/-/g, "/"))
         postDate.innerText = d.toLocaleDateString('en-US', {
             month: 'long',
             day: 'numeric',

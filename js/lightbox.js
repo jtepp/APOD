@@ -23,7 +23,7 @@ function showLightbox(id, postObject) {
 
     document.getElementById('lb-sidebar-title').innerHTML = p.title;
 
-    const d = new Date(p.date + " ");
+    const d = new Date((p.date + " ").replace(/-/g, "/"));
     document.getElementById('lb-sidebar-date').innerHTML = d.toLocaleDateString('en-US', {
         month: 'long',
         day: 'numeric',

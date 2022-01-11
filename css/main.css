@@ -57,6 +57,7 @@ header {
 }
 
 #logo {
+    position: relative;
     font-family: 'Lalezar';
     font-size: 40px;
     color: var(--black-white);
@@ -68,7 +69,19 @@ header {
     height: 100%;
     transition: all var(--transition);
     margin-left: 10px;
+    text-align: left;
 }
+
+:not(.logo-small)>#logo::after {
+    position: absolute;
+    bottom: 6px;
+    left: 0;
+    content: "All images are from NASA's Astronomy Picture of the Day (APOD) API";
+    font-size: 10px;
+    width: max-content;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
+}
+
 
 .logo-small>#logo {
     font-size: 20px;

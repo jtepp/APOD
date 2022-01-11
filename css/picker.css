@@ -1,6 +1,6 @@
 picker {
     position: relative;
-    background: var(--picker-bg);
+    background: var(--header-color);
     border-radius: 8px;
     display: flex;
     flex-direction: row;

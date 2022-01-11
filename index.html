@@ -15,12 +15,27 @@
 
 <body scheme="light">
 
-    <picker id="picker" value="Compact">
-        <div class="picker-item" value="Compact"></div>
-        <div class="picker-item" value="Large"></div>
-    </picker>
+    <div id="options-bar" value="Compact">
+        <picker id="picker">
+            <div class="picker-item" value="Compact"></div>
+            <div class="picker-item" value="Large"></div>
+        </picker>
 
-    <div id="feed-cont" class="loading"></div>
+        <div id="calendar-button">
+            <svg width="24" height="24" viewBox="0 0 24 24">
+                <path d="M7 11h2v2H7zm0 4h2v2H7zm4-4h2v2h-2zm0 4h2v2h-2zm4-4h2v2h-2zm0 4h2v2h-2z"></path>
+                <path
+                    d="M5 22h14c1.103 0 2-.897 2-2V6c0-1.103-.897-2-2-2h-2V2h-2v2H9V2H7v2H5c-1.103 0-2 .897-2 2v14c0 1.103.897 2 2 2zM19 8l.001 12H5V8h14z">
+                </path>
+            </svg>
+            <div id="calendar-field">
+                <input type="date" id="calendar-input">
+                <div id="calendar-go">Go</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="feed-cont"></div>
     <div id="load-cont">
         <div id="loading-animation">
             <div class="loader"></div>

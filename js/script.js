@@ -147,6 +147,8 @@ const feedCont = document.getElementById('feed-cont');
 const header = document.querySelector('header');
 const logo = document.getElementById('logo');
 const loadMore = document.getElementById('load-more-button')
+const calendarButton = document.getElementById('calendar-button')
+const calendarInput = document.getElementById('calendar-input')
 const topBarHeight = getComputedStyle(document.documentElement)
     .getPropertyValue('--top-bar-height').replace('px', '').trim();
 
@@ -177,12 +179,28 @@ logo.onclick = () => {
     document.documentElement.scrollTop = 0;
 }
 
+// populate(getDate(new Date().addDays(-daysToShow + dateOffset)), getDate(new Date().addDays(dateOffset)))
+// dateOffset -= daysToShow
+
 loadMore.onclick = () => {
-    populate(getDate(new Date().addDays(daysToShow * -1 + dateOffset)), getDate(new Date().addDays(dateOffset)))
+    populate(getDate(new Date().addDays(-daysToShow + dateOffset)), getDate(new Date().addDays(dateOffset)))
     dateOffset -= daysToShow
 }
 
-// demo()
+calendarButton.onclick = (e) => {
+    if (e.target.id == 'calendar-button')
+        calendarButton.classList.toggle('open')
+}
+
+document.getElementById('calendar-go').onclick = () => {
+    if (calendarInput.value.trim() != '') {
+        calendarButton.classList.remove('open')
+        populate(getDate(new Date(calendarInput.value).addDays(-daysToShow)), calendarInput.value, true)
+
+        // dateOffset = days since calendarInput.value
+        dateOffset = Math.floor((-new Date(calendarInput.value).getTime() + new Date().getTime()) / 86400000)
+    }
+}
 
 function populate(start, end, clear) {
     feedCont.classList.add('loading')
@@ -201,34 +219,8 @@ function populate(start, end, clear) {
         })
 }
 
-function demo() {
-    const demoArray = [{
-            "date": "2022-01-10",
-            "explanation": "Why does Comet Leonard's tail wag? The featured time-lapse video shows the ion tail of Comet C/2021 A1 (Leonard) as it changed over ten days early last month.  The video was taken by NASA's Solar Terrestrial Relations Observatory-Ahead (STEREO-A) spacecraft that co-orbits the Sun at roughly the same distance as the Earth. Each image in this 29-degree field was subtracted from following image to create frames that highlight differences. The video clearly shows Comet Leonard's long ion tail extending, wagging, and otherwise being blown around by the solar wind -- a stream of fast-moving ions that stream out from the Sun.  Since the video was taken, Comet Leonard continued plunging toward the Sun, reached its closest approach to the Sun between the orbits of Mercury and Venus, survived this closest approach without breaking apart, and is now fading as heads out of our Solar System.   Tuesday over Zoom: APOD editor to present the Best APOD Space Images of 2021",
-            "media_type": "video",
-            "service_version": "v1",
-            "thumbnail_url": "https://img.youtube.com/vi/RtDSxi-D4KA/0.jpg",
-            "title": "Comet Leonard's Tail Wag",
-            "url": "https://www.youtube.com/embed/RtDSxi-D4KA?rel=0"
-        },
-        {
-            "date": "2022-01-09",
-            "explanation": "What will become of Jupiter's Great Red Spot?  Gas giant Jupiter is the solar system's largest world with about 320 times the mass of planet Earth. Jupiter is home to one of the largest and longest lasting storm systems known, the Great Red Spot (GRS), visible to the left. The GRS is so large it could swallow Earth, although it has been shrinking.  Comparison with historical notes indicate that the storm spans only about one third of the exposed surface area it had 150 years ago. NASA's Outer Planets Atmospheres Legacy (OPAL) program has been monitoring the storm more recently using the Hubble Space Telescope. The featured Hubble OPAL image shows Jupiter as it appeared in 2016, processed in a way that makes red hues appear quite vibrant. Modern GRS data indicate that the storm continues to constrict its surface area, but is also becoming slightly taller, vertically.  No one knows the future of the GRS, including the possibility that if the shrinking trend continues, the GRS might one day even do what smaller spots on Jupiter have done -- disappear completely.    Tuesday over Zoom: APOD editor to present the Best APOD Space Images of 2021",
-            "hdurl": "https://apod.nasa.gov/apod/image/2201/JupiterOpal_HubbleMasztalerz_1880.jpg",
-            "media_type": "image",
-            "service_version": "v1",
-            "title": "Hubble's Jupiter and the Shrinking Great Red Spot",
-            "url": "https://apod.nasa.gov/apod/image/2201/JupiterOpal_HubbleMasztalerz_960.jpg"
-        }
-    ]
-    for (data of demoArray) {
-        const p = new Post(data)
-        posts[p.id] = p
-        feedCont.appendChild(p.getHTML())
-    }
-}
+calendarInput.setAttribute('max', getDate(new Date()))
 
-// function to get current date as YYYY-MM-DD
 function getDate(date) {
     let dd = date.getDate();
     let mm = date.getMonth() + 1; //January is 0!

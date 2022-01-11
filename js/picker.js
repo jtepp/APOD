@@ -11,7 +11,7 @@ if (localStorage.getItem("mode")) {
 
 function movePickerOver(element) {
     document.documentElement.style.setProperty("--over-left", `${indexOf(element.parentNode.children, element) * 100}px`);
-    document.getElementById("picker").setAttribute("value", element.getAttribute("value"))
+    document.getElementById("picker").parentElement.setAttribute("value", element.getAttribute("value"))
 }
 
 function indexOf(collection, element) {

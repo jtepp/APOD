@@ -16,10 +16,10 @@
     --header-color: #ffffff80;
     --black-white: #000;
     --white-black: #fff;
-    --picker-bg: #848484;
     --picker-over: #ffffff40;
     --picker-padding: 2px;
     --over-left: 0px;
+    --zero-one: 0;
 }
 
 body[scheme="dark"] {
@@ -28,8 +28,8 @@ body[scheme="dark"] {
     --header-color: #303030aa;
     --black-white: #fff;
     --white-black: #000;
-    --picker-bg: #3d3c42;
     --picker-over: rgba(184, 184, 184, 0.25);
+    --zero-one: 1;
 }
 
 body {
@@ -206,6 +206,10 @@ header.logo-small {
     position: relative;
 }
 
+:not(.loading)+#load-cont>#loading-animation {
+    animation: none;
+}
+
 .loading+#load-cont>#load-more-button {
     display: none;
 }
@@ -280,4 +284,64 @@ header.logo-small {
     100% {
         transform: translateX(-50%) rotate(360deg) translateY(-4px);
     }
+}
+
+#options-bar {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}
+
+#calendar-button {
+    position: relative;
+    background-color: var(--header-color);
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+    cursor: pointer;
+    color: var(--black-white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2px;
+    fill: var(--black-white);
+}
+
+#calendar-button.open {
+    border-radius: 8px 8px 0 0;
+}
+
+#calendar-field {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: none;
+    width: fit-content;
+    height: fit-content;
+    padding: 10px;
+    background-color: white;
+    transform: translateY(100%);
+    border-radius: 0 8px 8px 8px;
+    background-color: var(--header-color);
+    flex-direction: row;
+    gap: 6px;
+}
+
+#calendar-button.open>#calendar-field {
+    display: flex;
+}
+
+#calendar-input {
+    background-color: transparent;
+    color: var(--black-white);
+    appearance: none;
+    border: none;
+}
+
+::-webkit-calendar-picker-indicator {
+    filter: invert(var(--zero-one));
+}
+
+#calendar-go {
+    cursor: pointer;
 }

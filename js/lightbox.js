@@ -13,12 +13,12 @@ lbCont.onclick = (e) => {
 
 document.querySelectorAll('.post-image').forEach(img => {
     img.onclick = (e) => {
-        showLightbox(e.target)
+        showLightbox(e.target.parentElement.id)
     }
 })
 
-function showLightbox(postImage) {
-    const p = posts[postImage.parentElement.id];
+function showLightbox(id) {
+    const p = posts[id];
 
     document.getElementById('lightbox-img').src = p.url;
 
@@ -45,6 +45,35 @@ function showLightbox(postImage) {
         baseLike.click();
 
     }
+
+    // manage side buttons
+    const root = document.getElementById(p.id).parentElement.parentElement
+    const left = document.getElementById("lightbox-left")
+    const right = document.getElementById("lightbox-right")
+
+    if (root.previousElementSibling == null) {
+        left.style.display = 'none'
+        left.parentElement.style.cursor = 'default'
+    } else {
+        left.style.display = 'block'
+        left.parentElement.style.cursor = 'pointer'
+        left.parentElement.onclick = () => {
+            showLightbox(root.previousElementSibling.querySelector('.post-image-cont').id)
+        }
+    }
+
+    if (root.nextElementSibling == null) {
+        right.style.display = 'none'
+        right.parentElement.style.cursor = 'default'
+    } else {
+        right.style.display = 'block'
+        right.parentElement.style.cursor = 'pointer'
+        right.parentElement.onclick = () => {
+            showLightbox(root.nextElementSibling.querySelector('.post-image-cont').id)
+        }
+    }
+
+
 
     document.getElementById('lb-sidebar-share').onclick = (e) => {
         const text = window.location.href + '?date=' + this.date

@@ -8,12 +8,17 @@
     <script src="https://unpkg.com/boxicons@2.1.1/dist/boxicons.js"></script>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/post.css">
+    <link rel="stylesheet" href="css/picker.css">
     <link rel="stylesheet" href="css/lightbox.css">
     <title>APOD</title>
 </head>
 
 <body scheme="light">
 
+    <picker id="picker" value="Compact">
+        <div class="picker-item" value="Compact"></div>
+        <div class="picker-item" value="Large"></div>
+    </picker>
 
     <div id="feed-cont" mode="compact"></div>
 
@@ -36,6 +41,9 @@
 
     <div id="lightbox-cont" class="hidden">
         <div id="lightbox">
+            <div class="lb-arrow-cont">
+                <div id="lightbox-left" class="lightbox-arrow"></div>
+            </div>
             <div id="lightbox-img-cont">
                 <img src="https://img.youtube.com/vi/RtDSxi-D4KA/0.jpg" alt="" id="lightbox-img">
             </div>
@@ -84,14 +92,16 @@
                     </svg>
                 </div>
             </div>
-            <div id="lightbox-left" class="lightbox-arrow"></div>
-            <div id="lightbox-right" class="lightbox-arrow"></div>
+            <div class="lb-arrow-cont">
+                <div id="lightbox-right" class="lightbox-arrow"></div>
+            </div>
 
         </div>
     </div>
 
     <script src="js/script.js"></script>
     <script src="js/lightbox.js"></script>
+    <script src="js/picker.js"></script>
 </body>
 
 </html>

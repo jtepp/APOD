@@ -1,0 +1,39 @@
+picker {
+    position: relative;
+    background: var(--picker-bg);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 30px;
+    padding: var(--picker-padding);
+    color: var(--black-white);
+}
+
+picker::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: var(--over-left);
+    border-radius: 6px;
+    transition: left 200ms ease-out;
+    background: var(--picker-over);
+    width: 50%;
+    height: calc(100% - calc(var(--picker-padding) + var(--picker-padding)));
+    margin: var(--picker-padding);
+    pointer-events: none;
+}
+
+picker>.picker-item {
+    text-align: center;
+    width: 100px;
+    cursor: pointer;
+}
+
+picker>.picker-item::after {
+    content: attr(value);
+    width: 100%;
+    pointer-events: none;
+}

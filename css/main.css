@@ -4,28 +4,40 @@
     margin: 0;
     padding: 0;
     font-family: 'Helvetica Neue', Helvetica, sans-serif;
+    user-select: none;
 }
 
 :root {
     scroll-behavior: smooth;
     --top-bar-height: 60px;
     --transition: 0.2s ease-out;
-    --bg-color-start: #070820;
-    --bg-color-end: #07080D;
+    --bg-color-start: #28005c;
+    --bg-color-end: #070820;
     --header-color: #ffffff80;
     --black-white: #000;
     --white-black: #fff;
+    --picker-bg: #848484;
+    --picker-over: #ffffff40;
+    --picker-padding: 2px;
+    --over-left: 0px;
 }
 
 body[scheme="dark"] {
-    --bg-color: #4d0080;
+    --bg-color-start: #070820;
+    --bg-color-end: #07080D;
     --header-color: #303030aa;
     --black-white: #fff;
     --white-black: #000;
+    --picker-bg: #3d3c42;
+    --picker-over: rgba(184, 184, 184, 0.25);
 }
 
 body {
     background-image: linear-gradient(to right, var(--bg-color-start), var(--bg-color-end));
+    display: flex;
+    flex-direction: column;
+    padding-top: calc(20px + var(--top-bar-height));
+    align-items: center;
 }
 
 header {
@@ -55,10 +67,16 @@ header {
     justify-content: center;
     height: 100%;
     transition: all var(--transition);
+    margin-left: 10px;
 }
 
 .logo-small>#logo {
     font-size: 20px;
+}
+
+.logo-small>#scheme-button {
+    transform: scale(0.667);
+    top: -5px
 }
 
 header.logo-small {
@@ -66,24 +84,11 @@ header.logo-small {
 }
 
 #feed-cont {
-    padding-top: calc(var(--top-bar-height) + 20px);
+    padding-block: 40px;
     width: 100%;
     background: transparent;
     transition: background-color var(--transition);
 }
-
-@media (min-width: 1200px) {
-    header {
-        align-items: start;
-        padding-left: 10px;
-    }
-}
-
-/* #feed-cont:empty+header {
-    width: 100%;
-    height: 100vh;
-    will-change: height;
-} */
 
 #feed-cont:empty+header>#logo {
     font-size: 60px;
@@ -95,9 +100,11 @@ header.logo-small {
 
 #scheme-button {
     position: relative;
+    top: 0px;
     height: 100%;
     width: 80px;
     cursor: pointer;
+    transition: all var(--transition);
 }
 
 #scheme-button-bg {

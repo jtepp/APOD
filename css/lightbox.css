@@ -15,15 +15,14 @@
 }
 
 #lightbox {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
-    overflow: hidden;
     min-width: 500px;
     max-width: calc(100vw - 220px);
-    margin-block: 20px;
+    max-height: calc(100vh - 40px);
 }
 
 #lightbox-cont.hidden {
@@ -34,6 +33,8 @@
 #lightbox-img-cont {
     width: 100%;
     height: 100%;
+    overflow: hidden;
+    border-radius: 10px 0 0 10px;
 }
 
 #lightbox-img {
@@ -44,7 +45,6 @@
 
 #lightbox-sidebar {
     position: relative;
-    padding: 10px;
     width: 200px;
     height: 100%;
     background-color: var(--white-black);
@@ -55,11 +55,14 @@
     text-align: left;
     gap: 10px;
     min-width: 200px;
+    overflow: hidden;
+    border-radius: 0 10px 10px 0;
 }
 
-#lightbox-sidebar>* {
+#lightbox-sidebar>*:not(#lightbox-close) {
     max-width: 200px;
     word-wrap: break-word;
+    margin-inline: 10px;
 }
 
 #lb-sidebar-extras {
@@ -68,13 +71,15 @@
     justify-content: start;
 }
 
-#lb-sidebar-title {
+#lb-sidebar-title,
+.post-title {
     margin-top: 10px;
     font-size: 20px;
     font-weight: bold;
 }
 
-#lb-sidebar-date {
+#lb-sidebar-date,
+.post-date {
     font-size: 16px;
     /* font-weight: bold; */
 }
@@ -90,4 +95,42 @@
     position: absolute;
     right: 0;
     cursor: pointer;
+    fill: var(--black-white);
+}
+
+.lightbox-arrow {
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    border-width: 0 3px 3px 0;
+    border-style: solid;
+    border-color: white;
+}
+
+.lb-arrow-cont {
+    position: relative;
+    width: 40px;
+    min-width: 40px;
+    height: 100px;
+}
+
+#lightbox-left {
+    left: 20px;
+    transform: translate(-50%, -50%) rotate(135deg);
+    transition: left var(--transition);
+}
+
+.lb-arrow-cont:hover>#lightbox-left {
+    left: 10px;
+}
+
+#lightbox-right {
+    right: 0px;
+    transform: translate(-50%, -50%) rotate(315deg);
+    transition: right var(--transition);
+}
+
+.lb-arrow-cont:hover>#lightbox-right {
+    right: -10px;
 }

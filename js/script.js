@@ -36,6 +36,9 @@ class Post {
         postImage.classList.add('post-image')
         postImage.setAttribute('draggable', 'false')
         postImage.src = this.url
+        postImage.onclick = (e) => {
+            showLightbox(e.target.parentElement.id, undefined)
+        }
 
         postImageCont.appendChild(postImage)
         postDiv.appendChild(postImageCont)

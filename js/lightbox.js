@@ -12,11 +12,6 @@ lbCont.onclick = (e) => {
     }
 }
 
-document.querySelectorAll('.post-image').forEach(img => {
-    img.onclick = (e) => {
-        showLightbox(e.target.parentElement.id, undefined)
-    }
-})
 
 if (directDate)
     getPost(directDate)

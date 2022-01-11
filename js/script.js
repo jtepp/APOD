@@ -179,8 +179,8 @@ logo.onclick = () => {
     document.documentElement.scrollTop = 0;
 }
 
-// populate(getDate(new Date().addDays(-daysToShow + dateOffset)), getDate(new Date().addDays(dateOffset)))
-// dateOffset -= daysToShow
+populate(getDate(new Date().addDays(-daysToShow + dateOffset)), getDate(new Date().addDays(dateOffset)), true)
+dateOffset -= daysToShow
 
 loadMore.onclick = () => {
     populate(getDate(new Date().addDays(-daysToShow + dateOffset)), getDate(new Date().addDays(dateOffset)))
@@ -216,6 +216,14 @@ function populate(start, end, clear) {
                 feedCont.appendChild(p.getHTML())
             })
             feedCont.classList.remove('loading')
+        })
+        .catch(err => {
+            console.log(err)
+
+            dateOffset = 0
+            populate(getDate(new Date().addDays(-daysToShow + dateOffset)), getDate(new Date().addDays(dateOffset)), true)
+            dateOffset -= daysToShow
+
         })
 }
 

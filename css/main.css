@@ -204,6 +204,7 @@ header.logo-small {
 #loading-animation {
     display: none;
     position: relative;
+    margin-bottom: 100px;
 }
 
 :not(.loading)+#load-cont>#loading-animation {

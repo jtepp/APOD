@@ -14,7 +14,7 @@ lbCont.onclick = (e) => {
 
 document.querySelectorAll('.post-image').forEach(img => {
     img.onclick = (e) => {
-        showLightbox(e.target.parentElement.id)
+        showLightbox(e.target.parentElement.id, undefined)
     }
 })
 

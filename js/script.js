@@ -213,7 +213,7 @@ function populate(start, end, clear) {
             data.forEach(post => {
                 const p = new Post(post)
                 posts[p.id] = p
-                feedCont.appendChild(p.getHTML())
+                feedCont.prepend(p.getHTML())
             })
             feedCont.classList.remove('loading')
         })

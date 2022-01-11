@@ -7,8 +7,7 @@ class Post {
         this.url = config.thumbnail_url || config.url
         this.title = config.title
         this.mediaType = config.media_type
-        this.id = "id" + config.url.replace('https://apod.nasa.gov/apod/image/', '').replace('https://www.youtube.com/embed/', '').slice(0, -10).split('/').join('-')
-        this.ext = config.url.slice(-10)
+        this.id = "id" + config.date
         this.liked = localStorage.getItem(this.id) || false
         this.x = config
     }
@@ -143,10 +142,11 @@ Date.prototype.addDays = function (days) {
 
 let posts = {}
 let dateOffset = 0
-const daysToShow = 0
+const daysToShow = 20
 const feedCont = document.getElementById('feed-cont');
 const header = document.querySelector('header');
 const logo = document.getElementById('logo');
+const loadMore = document.getElementById('load-more-button')
 const topBarHeight = getComputedStyle(document.documentElement)
     .getPropertyValue('--top-bar-height').replace('px', '').trim();
 
@@ -177,11 +177,15 @@ logo.onclick = () => {
     document.documentElement.scrollTop = 0;
 }
 
+loadMore.onclick = () => {
+    populate(getDate(new Date().addDays(daysToShow * -1 + dateOffset)), getDate(new Date().addDays(dateOffset)))
+    dateOffset -= daysToShow
+}
 
-// populate(getDate(new Date().addDays(daysToShow * -1)), getDate(new Date()), true)
-demo()
+// demo()
 
 function populate(start, end, clear) {
+    feedCont.classList.add('loading')
     fetch('https://api.nasa.gov/planetary/apod?api_key=E7IKFgmhJVFqvxnlbKEJUvBTcVE5HfWCFFCuYSk9&&thumbs=true&start_date=' + start + '&end_date=' + end)
         .then(res => res.json())
         .then(data => {
@@ -193,6 +197,7 @@ function populate(start, end, clear) {
                 posts[p.id] = p
                 feedCont.appendChild(p.getHTML())
             })
+            feedCont.classList.remove('loading')
         })
 }
 
@@ -238,4 +243,19 @@ function getDate(date) {
     }
 
     return yyyy + '-' + mm + '-' + dd
+}
+
+
+function getPost(date) {
+    fetch('https://api.nasa.gov/planetary/apod?api_key=E7IKFgmhJVFqvxnlbKEJUvBTcVE5HfWCFFCuYSk9&&thumbs=true&date=' + date)
+        .then(res => res.json())
+        .then(data => {
+            if (data.code && data.code == 400) {
+                alert('No post found for that date')
+            } else {
+
+                const p = new Post(data)
+                showLightbox(undefined, p)
+            }
+        })
 }

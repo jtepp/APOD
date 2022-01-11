@@ -1,5 +1,6 @@
 const lbCont = document.getElementById('lightbox-cont');
 const close = document.getElementById('lightbox-close');
+const directDate = new URLSearchParams(window.location.search).get('date');
 
 close.onclick = () => {
     lbCont.classList.add('hidden');
@@ -17,8 +18,11 @@ document.querySelectorAll('.post-image').forEach(img => {
     }
 })
 
-function showLightbox(id) {
-    const p = posts[id];
+if (directDate)
+    getPost(directDate)
+
+function showLightbox(id, postObject) {
+    const p = postObject || posts[id];
 
     document.getElementById('lightbox-img').src = p.url;
 
@@ -47,32 +51,46 @@ function showLightbox(id) {
     }
 
     // manage side buttons
-    const root = document.getElementById(p.id).parentElement.parentElement
+    let root
     const left = document.getElementById("lightbox-left")
     const right = document.getElementById("lightbox-right")
 
-    if (root.previousElementSibling == null) {
+    if (postObject) {
         left.style.display = 'none'
         left.parentElement.style.cursor = 'default'
-    } else {
-        left.style.display = 'block'
-        left.parentElement.style.cursor = 'pointer'
-        left.parentElement.onclick = () => {
-            showLightbox(root.previousElementSibling.querySelector('.post-image-cont').id)
-        }
-    }
+        left.parentElement.onclick = null
 
-    if (root.nextElementSibling == null) {
         right.style.display = 'none'
         right.parentElement.style.cursor = 'default'
-    } else {
-        right.style.display = 'block'
-        right.parentElement.style.cursor = 'pointer'
-        right.parentElement.onclick = () => {
-            showLightbox(root.nextElementSibling.querySelector('.post-image-cont').id)
-        }
-    }
+        right.parentElement.onclick = null
 
+    } else {
+        root = document.getElementById(p.id).parentElement.parentElement
+        if (root.previousElementSibling == null) {
+            left.style.display = 'none'
+            left.parentElement.style.cursor = 'default'
+            left.parentElement.onclick = null
+        } else {
+            left.style.display = 'block'
+            left.parentElement.style.cursor = 'pointer'
+            left.parentElement.onclick = () => {
+                showLightbox(root.previousElementSibling.querySelector('.post-image-cont').id)
+            }
+        }
+
+        if (root.nextElementSibling == null) {
+            right.style.display = 'none'
+            right.parentElement.style.cursor = 'default'
+            right.parentElement.onclick = null
+        } else {
+            right.style.display = 'block'
+            right.parentElement.style.cursor = 'pointer'
+            right.parentElement.onclick = () => {
+                showLightbox(root.nextElementSibling.querySelector('.post-image-cont').id)
+            }
+        }
+
+    }
 
 
     document.getElementById('lb-sidebar-share').onclick = (e) => {

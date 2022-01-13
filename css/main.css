@@ -360,3 +360,18 @@ header.logo-small {
 #calendar-go {
     cursor: pointer;
 }
+
+footer {
+    color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+footer>a {
+    color: white;
+}
+
+footer>a:visited {
+    color: white;
+}

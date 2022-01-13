@@ -254,7 +254,8 @@ header.logo-small {
     width: 10px;
     height: 10px;
     transform: translateX(-50%);
-    animation: loader-1 1.6s infinite;
+    animation: loader-1 1.8s infinite;
+    animation-delay: 0s;
 }
 
 .loader:nth-of-type(2) {
@@ -262,13 +263,15 @@ header.logo-small {
     height: 6px;
     transform: translateX(-50%);
     animation: loader-2 1.8s infinite;
+    animation-delay: 0.05s;
 }
 
 .loader:nth-of-type(3) {
     width: 4px;
     height: 4px;
     transform: translateX(-50%);
-    animation: loader-3 2s infinite;
+    animation: loader-3 1.8s infinite;
+    animation-delay: 0.1s;
 }
 
 @keyframes loader-1 {

@@ -15,7 +15,7 @@
 <hr>
 <ul>
     <li>Auto-shrinking site header to prevent content from being covered</li>
-    <li>Smooth and pretty, CSS-only animations and graphics</li>
+    <li>Smooth and pretty, CSS-only animations and graphics (including loading animation)</li>
     <li>Dark and Light UI modes</li>
     <li>Large and Compact feed modes</li>
 </ul>
@@ -28,5 +28,5 @@
     <li>Double click to like an image (in lightbox or in Large mode)</li>
     <li>Likes and other preferences (color scheme, feed mode) saved locally</li>
     <li>Open lightbox on click in Compact mode, and use on screen arrows to navigate</li>
-    <li>Click the calendar button
+    <li>Click the calendar button to load feed from after a specific date</li>
 </ul>

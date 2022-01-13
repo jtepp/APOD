@@ -219,7 +219,7 @@ logo.onclick = () => {
     document.documentElement.scrollTop = 0;
 }
 
-if (usingiOS)
+if (usingiOS())
     calendarButton.style.display = 'none'
 
 populate(getDate(new Date().addDays(-daysToShow + dateOffset)), getDate(new Date().addDays(dateOffset)), true)

@@ -1,3 +1,7 @@
+[value="Large"]+#feed-cont section {
+    scroll-snap-align: center;
+}
+
 [value="Compact"]+#feed-cont {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 200px));
@@ -34,6 +38,9 @@
     position: relative;
     aspect-ratio: 1/1;
     zoom: 10%;
+}
+
+[value="Compact"]+#feed-cont .post-image-cont {
     cursor: pointer;
 }
 
@@ -187,5 +194,5 @@ svg {
 .post-desc {
     font-size: 14px;
     max-height: 180px;
-    overflow-y: hidden;
+    overflow-y: scroll;
 }

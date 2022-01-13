@@ -31,16 +31,22 @@
 }
 
 .post-image-cont {
+    position: relative;
     aspect-ratio: 1/1;
     zoom: 10%;
+    cursor: pointer;
 }
 
 .post-image {
-    cursor: pointer;
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
+    pointer-events: none;
+}
+
+[value="Large"]+#feed-cont .post-image {
+    cursor: default;
 }
 
 .post-extras {

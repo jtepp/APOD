@@ -31,16 +31,53 @@ class Post {
         const postImageCont = document.createElement('div')
         postImageCont.classList.add('post-image-cont')
         postImageCont.id = this.id
+        postImageCont.onclick = (e) => {
+            if (document.getElementById("options-bar").getAttribute('value') == "Compact")
+                showLightbox(e.target.id, undefined)
+        }
+        postImageCont.ondblclick = (e) => {
+            if (document.getElementById("options-bar").getAttribute('value') == "Large") {
+                const imgCont = e.target
+
+                if (!imgCont.classList.contains('like-animating')) {
+                    imgCont.classList.add('like-animating')
+                    setTimeout(() => {
+                        imgCont.classList.remove('like-animating')
+                    }, 1000)
+                }
+
+                if (!imgCont.parentElement.querySelector('.liked')) {
+                    imgCont.parentElement.querySelector('.like-button').click();
+                } else {
+                    const likeButt = imgCont.parentElement.querySelector('.like-button')
+
+                    if (!likeButt.classList.contains('like-bump')) {
+                        likeButt.classList.add('like-bump')
+                        setTimeout(() => {
+                            likeButt.classList.remove('like-bump')
+                        }, 400)
+                    }
+                }
+
+            }
+        }
 
         const postImage = document.createElement("img")
         postImage.classList.add('post-image')
         postImage.setAttribute('draggable', 'false')
         postImage.src = this.url
-        postImage.onclick = (e) => {
-            showLightbox(e.target.parentElement.id, undefined)
-        }
+
+        const postImgHeart = document.createElement('div')
+        postImgHeart.classList.add('post-img-heart')
+        postImgHeart.innerHTML = `
+        <svg class="bx-dblclick-heart-fill" viewBox="0 0 24 24">
+            <path
+                d="M20.205 4.791a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412L12 21.414l8.207-8.207c2.354-2.353 2.355-6.049-.002-8.416z">
+            </path>
+        </svg>`
 
         postImageCont.appendChild(postImage)
+        postImageCont.appendChild(postImgHeart)
         postDiv.appendChild(postImageCont)
 
         const postExtras = document.createElement('div')

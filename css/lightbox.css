@@ -38,19 +38,21 @@
     border-radius: 10px 0 0 10px;
 }
 
-#lightbox-img-heart {
+#lightbox-img-heart,
+.post-img-heart {
     position: absolute;
     fill: white;
-    width: 120px;
-    height: 120px;
+    width: 1800px;
+    height: 1800px;
     top: 50%;
     left: 50%;
-    filter: drop-shadow(0px 0px 8px black);
+    filter: drop-shadow(0px 0px 120px black);
     transform: translate(-50%, -50%) scale(0.7);
     opacity: 0;
 }
 
-.like-animating #lightbox-img-heart {
+.like-animating #lightbox-img-heart,
+.like-animating .post-img-heart {
     animation: like-animation 1s ease-out;
 }
 

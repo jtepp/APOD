@@ -55,15 +55,19 @@ function showLightbox(id, postObject) {
             }, 1000)
         }
 
+
+
         if (!imgCont.parentElement.querySelector('.liked')) {
             imgCont.parentElement.querySelector('.like-button').click();
         } else {
             const likeButt = imgCont.parentElement.querySelector('.like-button')
 
-            likeButt.classList.add('like-bump')
-            setTimeout(() => {
-                likeButt.classList.remove('like-bump')
-            }, 400)
+            if (!likeButt.classList.contains('like-bump')) {
+                likeButt.classList.add('like-bump')
+                setTimeout(() => {
+                    likeButt.classList.remove('like-bump')
+                }, 400)
+            }
         }
 
     }

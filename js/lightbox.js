@@ -1,4 +1,5 @@
 const lbCont = document.getElementById('lightbox-cont');
+const lbImgCont = document.getElementById('lightbox-img-cont');
 const close = document.getElementById('lightbox-close');
 const directDate = new URLSearchParams(window.location.search).get('date');
 
@@ -42,6 +43,28 @@ function showLightbox(id, postObject) {
 
         const baseLike = document.getElementById(p.id).parentElement.querySelector('.like-button')
         baseLike.click();
+
+    }
+
+    lbImgCont.ondblclick = (e) => {
+        const imgCont = e.target
+        if (!imgCont.classList.contains('like-animating')) {
+            imgCont.classList.add('like-animating')
+            setTimeout(() => {
+                imgCont.classList.remove('like-animating')
+            }, 1000)
+        }
+
+        if (!imgCont.parentElement.querySelector('.liked')) {
+            imgCont.parentElement.querySelector('.like-button').click();
+        } else {
+            const likeButt = imgCont.parentElement.querySelector('.like-button')
+
+            likeButt.classList.add('like-bump')
+            setTimeout(() => {
+                likeButt.classList.remove('like-bump')
+            }, 400)
+        }
 
     }
 

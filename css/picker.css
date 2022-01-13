@@ -30,6 +30,7 @@ picker>.picker-item {
     text-align: center;
     width: 100px;
     cursor: pointer;
+    z-index: 1;
 }
 
 picker>.picker-item::after {

@@ -52,6 +52,7 @@ header {
     text-align: center;
     background-color: var(--header-color);
     backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     align-items: center;
     transition: all var(--transition);
 }

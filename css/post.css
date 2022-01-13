@@ -56,6 +56,8 @@
     height: 40px;
     /* opacity: 0; */
     transition: opacity var(--transition);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
 }
 
 .post:hover .post-extras {

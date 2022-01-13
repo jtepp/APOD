@@ -19,7 +19,6 @@ if (directDate)
 
 function showLightbox(id, postObject) {
     const p = postObject || posts[id];
-
     document.getElementById('lightbox-img').src = p.url;
 
     document.getElementById('lb-sidebar-title').innerHTML = p.title;

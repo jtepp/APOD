@@ -219,6 +219,9 @@ logo.onclick = () => {
     document.documentElement.scrollTop = 0;
 }
 
+if (usingiOS)
+    calendarButton.style.display = 'none'
+
 populate(getDate(new Date().addDays(-daysToShow + dateOffset)), getDate(new Date().addDays(dateOffset)), true)
 dateOffset -= daysToShow
 
@@ -328,4 +331,18 @@ function demo() {
         posts[p.id] = p
         feedCont.appendChild(p.getHTML())
     }
+}
+
+function usingiOS() {
+    return [
+            'iPad Simulator',
+            'iPhone Simulator',
+            'iPod Simulator',
+            'iPad',
+            'iPhone',
+            'iPod'
+        ].includes(navigator.platform)
+        // iPad on iOS 13 detection
+        ||
+        (navigator.userAgent.includes("Mac") && "ontouchend" in document)
 }

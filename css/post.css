@@ -26,6 +26,7 @@
     position: relative;
     border-radius: 20px;
     overflow: hidden;
+    box-shadow: -2px 2px 6px #00000040;
 }
 
 [value="Large"]+#feed-cont .post {
@@ -42,6 +43,10 @@
 
 [value="Compact"]+#feed-cont .post-image-cont {
     cursor: pointer;
+}
+
+[value="Large"]+#feed-cont .post-image-cont {
+    border-radius: 20px 20px 0 0;
 }
 
 .post-image {

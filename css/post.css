@@ -140,6 +140,7 @@ svg {
     position: absolute;
     bottom: 0;
     background-color: var(--header-color);
+    border-radius: 0 0 20px 20px;
 }
 
 [value="Large"]+#feed-cont .post-extras {

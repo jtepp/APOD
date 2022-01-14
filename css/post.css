@@ -1,5 +1,5 @@
 [value="Large"]+#feed-cont section {
-    scroll-snap-align: center;
+    /* scroll-snap-align: center; */
 }
 
 [value="Compact"]+#feed-cont {

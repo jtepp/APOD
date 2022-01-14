@@ -23,8 +23,8 @@
 }
 
 html {
-    scroll-snap-type: y proximity;
-    scroll-padding-block: calc(100px + var(--top-bar-height));
+    /* scroll-snap-type: y proximity;
+    scroll-padding-block: calc(100px + var(--top-bar-height)); */
 }
 
 body[scheme="dark"] {

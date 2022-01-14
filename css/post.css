@@ -45,8 +45,9 @@
     cursor: pointer;
 }
 
-[value="Large"]+#feed-cont .post-image-cont {
+[value="Large"]+#feed-cont .post-image {
     border-radius: 20px 20px 0 0;
+    overflow: hidden;
 }
 
 .post-image {

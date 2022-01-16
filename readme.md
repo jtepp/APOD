@@ -14,7 +14,7 @@
 <ul>
     <li>Auto-shrinking site header to prevent content from being covered</li>
     <li>Smooth and pretty, CSS-only animations and graphics (including loading animation)</li>
-    <li>Responsive design, with a mobile-first approach</li>
+    <li>Responsive, mobile-friendly design</li>
     <li>Dark and Light UI modes</li>
     <li>Large and Compact feed modes</li>
     <li>Lightbox for images in compact mode</li>

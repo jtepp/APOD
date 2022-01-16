@@ -11,8 +11,8 @@
     scroll-behavior: smooth;
     --top-bar-height: 60px;
     --transition: 0.2s ease-out;
-    --bg-color-start: #28005c;
-    --bg-color-end: #070820;
+    /* --bg-color-start: #28005c; */
+    --bg-color: #070820;
     --header-color: #ffffff80;
     --black-white: #000;
     --white-black: #fff;
@@ -28,8 +28,8 @@ html {
 }
 
 body[scheme="dark"] {
-    --bg-color-start: #070820;
-    --bg-color-end: #07080D;
+    /* --bg-color-start: #070820; */
+    --bg-color: #07080D;
     --header-color: #303030aa;
     --black-white: #fff;
     --white-black: #000;
@@ -38,7 +38,8 @@ body[scheme="dark"] {
 }
 
 body {
-    background-image: linear-gradient(to right, var(--bg-color-start), var(--bg-color-end));
+    /* background-image: linear-gradient(to right, var(--bg-color-start), var(--bg-color-end)); */
+    background-color: var(--bg-color);
     display: flex;
     flex-direction: column;
     padding-top: calc(20px + var(--top-bar-height));

@@ -249,7 +249,7 @@ document.getElementById('calendar-go').onclick = () => {
 
 function populate(start, end, clear) {
     feedCont.classList.add('loading')
-    fetch('https://api.nasa.gov/planetary/apod?api_key=E7IKFgmhJVFqvxnlbKEJUvBTcVE5HfWCFFCuYSk9&&thumbs=true&start_date=' + start + '&end_date=' + end)
+    fetch('https://api.nasa.gov/planetary/apod?api_key=E7IKFgmhJVFqvxnlbKEJUvBTcVE5HfWCFFCuYSk9&thumbs=true&start_date=' + start + '&end_date=' + end)
         .then(res => res.json())
         .then(data => {
             // console.log(data)
